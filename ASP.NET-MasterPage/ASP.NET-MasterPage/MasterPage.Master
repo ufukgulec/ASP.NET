@@ -1,0 +1,55 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="MasterPage.master.cs" Inherits="ASP.NET_MasterPage.MasterPage" %>
+
+<!DOCTYPE html>
+
+<html>
+<head runat="server">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title></title>
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+    <style type="text/css">
+        .auto-style1 {
+            height: 100px;
+        }
+        .auto-style2 {
+            width: 110px;
+            vertical-align:top;
+        }
+        .auto-style3 {
+            text-align: center;
+        }
+    </style>
+    <link href="StyleSheet1.css" rel="stylesheet" />
+</head>
+<body>
+    <form id="form1" runat="server">
+        <div>
+            <table style="width:auto; align-items:center">
+                <tr>
+                    <td>
+                        <img alt="" class="auto-style1" src="resimler/banner.JPG" /></td>
+                </tr>
+            </table>
+            <table style="width:1000px; height:100px ">
+                <tr>
+                    <td class="auto-style2">
+                        
+                        <a href="WebForm1.aspx">Ana Sayfa</a> <a href="Hakkımızda.aspx">Hakkımızda</a><br />
+                        <a href="Haberler.aspx">Haberler</a><br />
+                        <a href="Duyurular.aspx">Duyurular</a></td>
+                    <td style="vertical-align:top">
+                        <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+                        </asp:ContentPlaceHolder>
+                    </td>
+                </tr>
+            </table>
+            <table style="width:100%; background-color: #666666;">
+                <tr>
+                    <td class="auto-style3" style="color: #FFFFFF">Tüm Haklar saklıdır. İzin alınmadan kullanılması yasaktır.</td>
+                </tr>
+            </table>
+        </div>
+    </form>
+</body>
+</html>
