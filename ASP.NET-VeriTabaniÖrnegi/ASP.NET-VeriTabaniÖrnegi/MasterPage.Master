@@ -1,0 +1,33 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="MasterPage.master.cs" Inherits="ASP.NET_VeriTabaniÖrnegi.MasterPage" %>
+
+<!DOCTYPE html>
+
+<html>
+<head runat="server">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title></title>
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+    <link href="MasterPageStyleSheets.css" rel="stylesheet" />
+</head>
+<body>
+    <form id="form1" runat="server">
+        <div class="banner">
+            <h1 class="baslik">veriTabanım</h1>
+        </div>
+        <div style="width:100%; height:auto">
+            <div class="menu">
+                <a href="Anasayfa.aspx">AnaSayfa</a><br />
+                    <a href="Veriler.aspx">Veriler</a><br />
+                    <a href="Ekle.aspx">Veri Ekle</a><br />
+                    <a href="Cikar.aspx">Veri Çıkar
+            </a>
+            </div>
+            <div class="content">
+                <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+                </asp:ContentPlaceHolder>
+            </div>
+        </div>
+    </form>
+    </body>
+</html>
