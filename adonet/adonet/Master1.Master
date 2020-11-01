@@ -1,0 +1,146 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Master1.master.cs" Inherits="adonet.Master1" %>
+
+<!DOCTYPE html>
+
+<html>
+<head runat="server">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title></title>
+    <link href="css/bootstrap.css" rel="stylesheet" />
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link href="css/login.css" rel="stylesheet" />
+    <style>
+        .mySlides {
+            display: none;
+        }
+
+        #baslik {
+            font-family: Arial;
+            color: green;
+            animation-name: example;
+            animation-duration: 8s;
+        }
+
+        @keyframes example {
+            from {
+                color: lightgreen;
+            }
+
+            to {
+                color: white;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div id="menü">
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+            <svg class="carousel-control-next-icon"></svg>
+            <a href="Anasayfa.aspx" style="text-decoration: none">
+                <h2 class="text-uppercase" id="baslik">Dolap</h2>
+            </a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <form class="form-inline my-2 my-lg-0 ml-auto ">
+                    <input style="width: 300px" class="form-control mr-sm-2" type="search" placeholder="Aklındaki ne?" aria-label="Search">
+                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+                </form>
+                <ul class="navbar-nav ml-auto ">
+
+                    <li class="nav-item">
+                        <button class="login" onclick="document.getElementById('id01').style.display='block'" style="width: auto;">Login</button>
+                        <%--<a class="nav-link" href="#">Giriş</a>--%>
+                    </li>
+                </ul>
+
+            </div>
+        </nav>
+
+    </div>
+    <div id="id01" class="modal">
+
+        <form class="modal-sm modal-content animate" action="#" method="post">
+            <div class="imgcontainer">
+                <span onclick="document.getElementById('id01').style.display='none'" class="close" title="Close Modal">&times;</span>
+                <img src="images/avatar.png" alt="Avatar" class="avatar">
+            </div>
+
+            <div class="container1">
+                <label for="uname"><b>Kullanıcı Adı</b></label>
+                <input class="textbox" type="text" placeholder="Kullanıcı Adınızı giriniz." name="uname" required>
+
+                <label for="psw"><b>Parola</b></label>
+                <input class="textbox" type="password" placeholder="Parolanızı Giriniz." name="psw" required>
+
+                <button class="login" type="submit">Giriş</button>
+            </div>
+
+            <div class="container" style="background-color: #f1f1f1">
+                <button type="button" onclick="document.getElementById('id01').style.display='none'" class="login cancelbtn">Geri</button>
+                <span class="psw">Şifremi <a href="#">unuttum</a></span>
+            </div>
+        </form>
+    </div>
+    <br />
+    <div id="tuslar">
+        <div class="container">
+            <div class="btn-group d-flex flex-column flex-md-row justify-content-between" role="group" aria-label="Basic example">
+                <asp:DataList ID="DataListKategori" CssClass="ml-auto mr-auto" runat="server" RepeatDirection="Horizontal">
+                    <ItemTemplate>
+                        <a href="#" type="button" class="btn btn-outline-dark"><%#Eval("kategoriAd") %></a>
+                    </ItemTemplate>
+                </asp:DataList>
+            </div>
+        </div>
+    </div>
+    <br />
+    <form id="form1" runat="server">
+        <div class="container">
+            <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+            </asp:ContentPlaceHolder>
+        </div>
+    </form>
+
+    <footer class="blockquote-footer" style="margin-top: 30px">
+        <div style="background-color: #212529; color: white; padding: 20px" class="text-center">
+            <h5>Bu bir asp.net projesidir.</h5>
+            <p>oug505@gmail.com</p>
+        </div>
+    </footer>
+
+    <script>
+        var modal = document.getElementById('id01');
+
+        // When the user clicks anywhere outside of the modal, close it
+        window.onclick = function (event) {
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        }
+
+        var slideIndex = 1;
+        showDivs(slideIndex);
+
+        function plusDivs(n) {
+            showDivs(slideIndex += n);
+        }
+
+        function showDivs(n) {
+            var i;
+            var x = document.getElementsByClassName("mySlides");
+            if (n > x.length) { slideIndex = 1 }
+            if (n < 1) { slideIndex = x.length }
+            for (i = 0; i < x.length; i++) {
+                x[i].style.display = "none";
+            }
+            x[slideIndex - 1].style.display = "block";
+        }
+
+    </script>
+</body>
+
+</html>

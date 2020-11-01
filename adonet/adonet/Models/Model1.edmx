@@ -1,0 +1,276 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="adonetModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="kategori">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="kategoriAd" Type="varchar" MaxLength="50" />
+          <Property Name="eklenmeTarihi" Type="datetime" />
+        </EntityType>
+        <EntityType Name="kullanici">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="kullaniciAd" Type="varchar" MaxLength="50" />
+          <Property Name="parola" Type="varchar" MaxLength="50" />
+          <Property Name="kayitTarihi" Type="datetime" />
+        </EntityType>
+        <EntityType Name="slayt">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="resimYol" Type="varchar" MaxLength="50" />
+          <Property Name="resimBaslik" Type="varchar" MaxLength="50" />
+          <Property Name="resimAciklama" Type="varchar" MaxLength="50" />
+          <Property Name="gösterim" Type="bit" />
+        </EntityType>
+        <EntityType Name="urun">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="urunAd" Type="varchar" MaxLength="50" />
+          <Property Name="urunAciklama" Type="varchar" MaxLength="50" />
+          <Property Name="resimYol" Type="varchar" MaxLength="50" />
+          <Property Name="begeniSayisi" Type="int" />
+          <Property Name="kategoriId" Type="int" />
+        </EntityType>
+        <EntityType Name="yorum">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="yorumBaslik" Type="varchar" MaxLength="50" />
+          <Property Name="yorumDetay" Type="varchar(max)" />
+          <Property Name="kullaniciId" Type="int" />
+          <Property Name="yorumTarih" Type="datetime" />
+          <Property Name="onay" Type="bit" />
+        </EntityType>
+        <Association Name="FK__urun__kategoriId__2B3F6F97">
+          <End Role="kategori" Type="Self.kategori" Multiplicity="0..1" />
+          <End Role="urun" Type="Self.urun" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="kategori">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="urun">
+              <PropertyRef Name="kategoriId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__yorum__kullanici__33D4B598">
+          <End Role="kullanici" Type="Self.kullanici" Multiplicity="0..1" />
+          <End Role="yorum" Type="Self.yorum" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="kullanici">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="yorum">
+              <PropertyRef Name="kullaniciId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="adonetModelStoreContainer">
+          <EntitySet Name="kategori" EntityType="Self.kategori" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="kullanici" EntityType="Self.kullanici" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="slayt" EntityType="Self.slayt" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="urun" EntityType="Self.urun" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="yorum" EntityType="Self.yorum" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__urun__kategoriId__2B3F6F97" Association="Self.FK__urun__kategoriId__2B3F6F97">
+            <End Role="kategori" EntitySet="kategori" />
+            <End Role="urun" EntitySet="urun" />
+          </AssociationSet>
+          <AssociationSet Name="FK__yorum__kullanici__33D4B598" Association="Self.FK__yorum__kullanici__33D4B598">
+            <End Role="kullanici" EntitySet="kullanici" />
+            <End Role="yorum" EntitySet="yorum" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="adonetModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="kategori">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="kategoriAd" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="eklenmeTarihi" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="uruns" Relationship="Self.FK__urun__kategoriId__2B3F6F97" FromRole="kategori" ToRole="urun" />
+        </EntityType>
+        <EntityType Name="kullanici">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="kullaniciAd" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="parola" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="kayitTarihi" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="yorums" Relationship="Self.FK__yorum__kullanici__33D4B598" FromRole="kullanici" ToRole="yorum" />
+        </EntityType>
+        <EntityType Name="slayt">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="resimYol" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="resimBaslik" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="resimAciklama" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="gösterim" Type="Boolean" />
+        </EntityType>
+        <EntityType Name="urun">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="urunAd" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="urunAciklama" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="resimYol" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="begeniSayisi" Type="Int32" />
+          <Property Name="kategoriId" Type="Int32" />
+          <NavigationProperty Name="kategori" Relationship="Self.FK__urun__kategoriId__2B3F6F97" FromRole="urun" ToRole="kategori" />
+        </EntityType>
+        <EntityType Name="yorum">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="yorumBaslik" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="yorumDetay" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="kullaniciId" Type="Int32" />
+          <Property Name="yorumTarih" Type="DateTime" Precision="3" />
+          <Property Name="onay" Type="Boolean" />
+          <NavigationProperty Name="kullanici" Relationship="Self.FK__yorum__kullanici__33D4B598" FromRole="yorum" ToRole="kullanici" />
+        </EntityType>
+        <Association Name="FK__urun__kategoriId__2B3F6F97">
+          <End Role="kategori" Type="Self.kategori" Multiplicity="0..1" />
+          <End Role="urun" Type="Self.urun" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="kategori">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="urun">
+              <PropertyRef Name="kategoriId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__yorum__kullanici__33D4B598">
+          <End Role="kullanici" Type="Self.kullanici" Multiplicity="0..1" />
+          <End Role="yorum" Type="Self.yorum" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="kullanici">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="yorum">
+              <PropertyRef Name="kullaniciId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="adonetEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="kategoris" EntityType="Self.kategori" />
+          <EntitySet Name="kullanicis" EntityType="Self.kullanici" />
+          <EntitySet Name="slayts" EntityType="Self.slayt" />
+          <EntitySet Name="uruns" EntityType="Self.urun" />
+          <EntitySet Name="yorums" EntityType="Self.yorum" />
+          <AssociationSet Name="FK__urun__kategoriId__2B3F6F97" Association="Self.FK__urun__kategoriId__2B3F6F97">
+            <End Role="kategori" EntitySet="kategoris" />
+            <End Role="urun" EntitySet="uruns" />
+          </AssociationSet>
+          <AssociationSet Name="FK__yorum__kullanici__33D4B598" Association="Self.FK__yorum__kullanici__33D4B598">
+            <End Role="kullanici" EntitySet="kullanicis" />
+            <End Role="yorum" EntitySet="yorums" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="adonetModelStoreContainer" CdmEntityContainer="adonetEntities">
+          <EntitySetMapping Name="kategoris">
+            <EntityTypeMapping TypeName="adonetModel.kategori">
+              <MappingFragment StoreEntitySet="kategori">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="kategoriAd" ColumnName="kategoriAd" />
+                <ScalarProperty Name="eklenmeTarihi" ColumnName="eklenmeTarihi" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="kullanicis">
+            <EntityTypeMapping TypeName="adonetModel.kullanici">
+              <MappingFragment StoreEntitySet="kullanici">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="kullaniciAd" ColumnName="kullaniciAd" />
+                <ScalarProperty Name="parola" ColumnName="parola" />
+                <ScalarProperty Name="kayitTarihi" ColumnName="kayitTarihi" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="slayts">
+            <EntityTypeMapping TypeName="adonetModel.slayt">
+              <MappingFragment StoreEntitySet="slayt">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="resimYol" ColumnName="resimYol" />
+                <ScalarProperty Name="resimBaslik" ColumnName="resimBaslik" />
+                <ScalarProperty Name="resimAciklama" ColumnName="resimAciklama" />
+                <ScalarProperty Name="gösterim" ColumnName="gösterim" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="uruns">
+            <EntityTypeMapping TypeName="adonetModel.urun">
+              <MappingFragment StoreEntitySet="urun">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="urunAd" ColumnName="urunAd" />
+                <ScalarProperty Name="urunAciklama" ColumnName="urunAciklama" />
+                <ScalarProperty Name="resimYol" ColumnName="resimYol" />
+                <ScalarProperty Name="begeniSayisi" ColumnName="begeniSayisi" />
+                <ScalarProperty Name="kategoriId" ColumnName="kategoriId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="yorums">
+            <EntityTypeMapping TypeName="adonetModel.yorum">
+              <MappingFragment StoreEntitySet="yorum">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="yorumBaslik" ColumnName="yorumBaslik" />
+                <ScalarProperty Name="yorumDetay" ColumnName="yorumDetay" />
+                <ScalarProperty Name="kullaniciId" ColumnName="kullaniciId" />
+                <ScalarProperty Name="yorumTarih" ColumnName="yorumTarih" />
+                <ScalarProperty Name="onay" ColumnName="onay" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
